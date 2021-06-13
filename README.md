@@ -11,7 +11,7 @@ The russian version of the task can be found in the repository.
  2.1. [List 1.](#list-1)
  
 
-## Chapter I
+# Chapter I
 
 ## Level 2. Hall.
 
@@ -34,7 +34,7 @@ Suddenly, you hear a clear, perfectly audible voice from the speakers:
 ***LOADING...***
 
 
-## Chapter II
+# Chapter II
 
 ## List 1.
 
