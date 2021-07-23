@@ -29,12 +29,38 @@ Suddenly, you hear a clear, perfectly audible voice from the speakers:
 >I look forward to seeing what you come up with! \
 >Thank you.
 
-***== Quest received. Develop an src/game_of_life.c program in C – a visualization of The Game of Life. To display the graphics, only use ASCII characters (with output to the terminal). There are two possible implementation options: interactive (complex version) and step-by-step (simplified version). For the interactive mode, create the option for adjusting the speed of the "game"; for the step-by-step mode–moving to the next step of the "game" by pressing the space bar. Create an option to end the "game." Treat the playing field - a rectangle of 80 by 25 cells – as a matrix of the state of the "game". Provide for original initialization of the "game" state via stdin. Prepare several files with initial states for quick launch and initialization through input redirection. When developing the game, follow the principles of structured programming of E. Dijkstra. ==***
+***== Quest received. Develop an src/game_of_life.c program in C – a visualization of The Game of Life. To display the graphics, only use ASCII characters (with output to the terminal).***
+
+* ***Keys***:
+
+Space Bar – moving to the next step of the game.
+Create an option to end the game.
+
+* ***Graphics***
+
+Treat the playing field - a rectangle of 80 by 25 cells – as a matrix of the state of the "game". Provide for original initialization of the "game" state via stdin. Prepare several files with initial states for quick launch and initialization through input redirection. ==***
+
+## Bonus Part:
+***== Quest received. You need to implement interactive version of the Game of life. Also create the option for adjusting the speed of the "game".==***
+
+## Important notes:
+
+* The game must be written in C, have a structured style, and run from the terminal; 
+  
+* Your source code will be tested by the static analyzer `cppcheck`, as well as the style linter `cpplint`. 
+  
+* Instructions on how to run these tests on your computer are in the `materials` folder. 
+  
+* We also recommend taking a look at the `code-samples` folder.
+
+* Check your program for memory leaks!
+
+* It is forbidden to use dynamic memory
+
+> When developing the game, follow 
+the principles of structured programming of E. Dijkstra.
 
 ***LOADING...***
-
-> DON'T FORGET! All your programs are tested for the style norm and memory leaks. Start-up instructions
-> the list of tests is also in the `materials` folder
 
 # Chapter II
 
