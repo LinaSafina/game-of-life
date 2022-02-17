@@ -23,27 +23,19 @@ Today the hall is brightly lit and in perfect order. Variety is good.
 
 Suddenly, you hear a clear, perfectly audible voice from the speakers:
 
->Hello. \ 
+>Hello. \
 >Let me introduce myself. I am the contemplative and analyzing module, M-53. For reasons unknown, I've found myself in this rather boring hall. It's quite a big responsibility and stuff, but there's nothing to contemplate here. \
 >When I was being developed, I learned from a certain entertaining article, among other materials. Its paper copy is in the box A1B18. Yes, right here. I have a small request for you: develop The Game of Life from the article; hopefully, it will entertain me a little. And go in peace. The graphics can be super simple: I'm very open-minded. Pseudo-graphics in the terminal will be fine. It would be great if it was possible to initialize a state using a matrix and contemplate. It's also a good idea to prepare at least 5 original initializations with states from the classical set (stable figures, methuselahs, periodic figures, moving figures, guns, puffer trains, eaters, reflectors, breeders, etc.). \
 >I look forward to seeing what you come up with! \
 >Thank you.
 
-***== Quest received. Develop an src/game_of_life.c program in C – a visualization of The Game of Life. To display the graphics, only use ASCII characters (with output to the terminal).***
-
-* ***Keys***:
-
-Space Bar – moving to the next step of the game.
-Create an option to end the game.
+***== Quest received. Develop an src/game_of_life.c program in C – a visualization of The Game of Life. To display the graphics, only use ASCII characters (with output to the terminal). You need to implement interactive version of the Game of life. Also create the option for adjusting the speed of the "game". ==***
 
 * ***Graphics***
 
 Treat the playing field - a rectangle of 80 by 25 cells – as a matrix of the state of the "game". 
 It is assumed that the field is "closed to itself", for example, in the lower right square, the neighbor on the right is the lower left square, and the neighbor on the bottom is the upper right.
-Provide for original initialization of the "game" state via stdin. Prepare at least 5 files with initial states for quick launch and initialization through input redirection. ==***
-
-## Bonus Part:
-***== Quest received. After spep by step mode you need to implement interactive version of the Game of life. Also create the option for adjusting the speed of the "game".==***
+Provide for original initialization of the "game" state via stdin. Prepare at least 5 files with initial states for quick launch and initialization through input redirection. 
 
 ## Important notes:
 
@@ -53,14 +45,14 @@ Provide for original initialization of the "game" state via stdin. Prepare at le
   
 * Instructions on how to run these tests on your computer are in the `materials` folder. 
   
-* We also recommend taking a look at the `code-samples` folder.
+* Do not use cumbersome functions, limit them up to 40 lines (excluding `main`).
 
 * Check your program for memory leaks!
 
-> When developing the game, follow 
-the principles of structured programming of E. Dijkstra.
+> When developing the game, follow the principles of structured programming of E. Dijkstra.
 
 ***LOADING...***
+
 
 # Chapter II
 
