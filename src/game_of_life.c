@@ -6,11 +6,11 @@
 #define WIDTH 80
 #define HEIGHT 25
 
-void start_game(int **pArray, char *pattern);
+void read_file(int **pArray, char *pattern);
 int update_cell(int **matrix, int line, int column);
 void update_field(int **matrix, int time);
 void print_field(int **matrix);
-void read_file(int **matrix, int initial_pattern);
+void set_initial_pattern(int **matrix, int initial_pattern);
 void choose_initial_settings(int *initial_pattern, int *speed);
 
 int main() {
@@ -26,24 +26,27 @@ int main() {
     printf("\033c");
     choose_initial_settings(&initial_pattern, &speed);
 
-    time = 6 - speed;
+    time = (6 - speed) * 100000 / speed;
 
-    read_file(pArray, initial_pattern);
+    set_initial_pattern(pArray, initial_pattern);
 
     // print first genertion
     print_field(pArray);
 
-    sleep(time);
+    usleep(time);
 
     update_field(pArray, time);
 
     for (int i = 0; i < HEIGHT; i++) free(pArray[i]);
     free(pArray);
 
+    printf("The game is over!");
+    sleep(2);
+
     return 0;
 }
 
-void start_game(int **pArray, char *pattern) {
+void read_file(int **pArray, char *pattern) {
     FILE *file = fopen(pattern, "r");
     char c;
 
@@ -71,19 +74,27 @@ int update_cell(int **matrix, int line, int column) {
     int alive_neighbours_count = 0;
     int h, w;
 
-    for (int i = line - 1; i <= line + 1; i++) {
-        for (int j = column - 1; j <= column + 1; j++) {
-            if (i >= 0 && i < HEIGHT && j >= 0 && j < WIDTH) {
-                h = i;
-                w = j;
-            } else {
-                h = (i == -1) ? HEIGHT - 1 : 0;
-                w = (j == -1) ? WIDTH - 1 : 0;
+    for (int i = -1; i <= 1; i++) {
+        for (int j = -1; j <= 1; j++) {
+            if (i == 0 && j == 0) {
+                continue;
             }
 
-            if (matrix[h][w] == 1 && !(i == line && j == column)) {
-                alive_neighbours_count++;
+            h = line + i;
+            if (h < 0) {
+                h += HEIGHT;
+            } else if (h >= HEIGHT) {
+                h -= HEIGHT;
             }
+
+            w = column + j;
+            if (w < 0) {
+                w += WIDTH;
+            } else if (w >= WIDTH) {
+                w -= WIDTH;
+            }
+
+            alive_neighbours_count += matrix[h][w];
         }
     }
 
@@ -121,7 +132,7 @@ void update_field(int **matrix, int time) {
         }
         printf("\033c");
         print_field(matrix);
-        sleep(time);
+        usleep(time);
     }
 }
 
@@ -140,7 +151,7 @@ void print_field(int **matrix) {
     printf("\n");
 }
 
-void read_file(int **matrix, int initial_pattern) {
+void set_initial_pattern(int **matrix, int initial_pattern) {
     char filename[20];
 
     switch (initial_pattern) {
@@ -168,7 +179,7 @@ void read_file(int **matrix, int initial_pattern) {
             break;
     }
 
-    start_game(matrix, filename);
+    read_file(matrix, filename);
 }
 
 void choose_initial_settings(int *initial_pattern, int *speed) {
