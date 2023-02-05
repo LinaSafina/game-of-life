@@ -52,6 +52,11 @@ void read_file(int **pArray, char *pattern) {
     FILE *file = fopen(pattern, "r");
     char c;
 
+    if (NULL == file) {
+        printf("Sorry, we couldn't find this pattern. Try to choose another one.");
+        exit(1);
+    }
+
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             c = fgetc(file);
