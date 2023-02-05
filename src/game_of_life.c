@@ -6,11 +6,11 @@
 #define WIDTH 80
 #define HEIGHT 25
 
-void read_file(int **pArray, char *pattern, int **initial_matrix);
+void read_file(int **pArray, char *pattern);
 int update_cell(int **matrix, int line, int column);
-void update_field(int **matrix, int time, int **initial_matrix);
+void update_field(int **matrix, int time);
 void print_field(int **matrix);
-void set_initial_pattern(int **matrix, int initial_pattern, int **initial_matrix);
+void set_initial_pattern(int **matrix, int initial_pattern);
 void choose_initial_settings(int *initial_pattern, int *speed);
 
 int main() {
@@ -21,12 +21,6 @@ int main() {
         pArray[i] = (int *)malloc((WIDTH) * sizeof(int));
     }
 
-    int **initial_matrix = (int **)malloc((HEIGHT) * sizeof(int *));
-
-    for (int i = 0; i < HEIGHT; i++) {
-        initial_matrix[i] = (int *)malloc((WIDTH) * sizeof(int));
-    }
-
     int initial_pattern, speed, time;
 
     printf("\033c");
@@ -34,21 +28,19 @@ int main() {
 
     time = (6 - speed) * 100000 / speed;
 
-    set_initial_pattern(pArray, initial_pattern, initial_matrix);
+    set_initial_pattern(pArray, initial_pattern);
 
     // print first genertion
     print_field(pArray);
 
     usleep(time);
 
-    update_field(pArray, time, initial_matrix);
+    update_field(pArray, time);
 
     for (int i = 0; i < HEIGHT; i++) {
         free(pArray[i]);
-        free(initial_matrix[i]);
     }
     free(pArray);
-    free(initial_matrix);
 
     printf("The game is over!");
     sleep(2);
@@ -56,7 +48,7 @@ int main() {
     return 0;
 }
 
-void read_file(int **pArray, char *pattern, int **initial_matrix) {
+void read_file(int **pArray, char *pattern) {
     FILE *file = fopen(pattern, "r");
     char c;
 
@@ -70,10 +62,8 @@ void read_file(int **pArray, char *pattern, int **initial_matrix) {
 
             if (c == '1') {
                 pArray[i][j] = 1;
-                initial_matrix[i][j] = 1;
             } else if (c == '0') {
                 pArray[i][j] = 0;
-                initial_matrix[i][j] = 0;
             }
         }
     }
@@ -121,24 +111,19 @@ int update_cell(int **matrix, int line, int column) {
 }
 
 // updates cells one by one and return 0 if field remained the same, and 1 if it was updated
-void update_field(int **matrix, int time, int **initial_matrix) {
+void update_field(int **matrix, int time) {
     int updated_matrix[HEIGHT][WIDTH];
 
     int is_changed = 1;
-    int is_different_from_initial = 1;
 
-    while (is_changed && is_different_from_initial) {
+    while (is_changed) {
         is_changed = 0;
-        is_different_from_initial = 0;
 
         for (int i = 0; i < HEIGHT; i++) {
             for (int j = 0; j < WIDTH; j++) {
                 updated_matrix[i][j] = update_cell(matrix, i, j);
                 if (updated_matrix[i][j] != matrix[i][j]) {
                     is_changed = 1;
-                }
-                if (updated_matrix[i][j] != initial_matrix[i][j]) {
-                    is_different_from_initial = 1;
                 }
             }
         }
@@ -169,7 +154,7 @@ void print_field(int **matrix) {
     printf("\n");
 }
 
-void set_initial_pattern(int **matrix, int initial_pattern, int **initial_matrix) {
+void set_initial_pattern(int **matrix, int initial_pattern) {
     char filename[20];
 
     switch (initial_pattern) {
@@ -197,7 +182,7 @@ void set_initial_pattern(int **matrix, int initial_pattern, int **initial_matrix
             break;
     }
 
-    read_file(matrix, filename, initial_matrix);
+    read_file(matrix, filename);
 }
 
 void choose_initial_settings(int *initial_pattern, int *speed) {
